@@ -1,0 +1,68 @@
+version: '3.5'
+services:
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    container_name: nginx
+    volumes:
+      - ./:/var/www
+      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+  mariadb:
+    image: mariadb:11.1.2-jammy
+    restart: always
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: DFGHJKVCBNfghjCVBNPLK
+      MARIADB_DATABASE: 'main'
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: _docker/rabbitmq/Dockerfile
+    restart: unless-stopped
+    container_name: rabbitmq
+    ports:
+      - "15672:15672" # Управление RabbitMQ
+      - "5672:5672"   # AMQP порт
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+
+  # clickhouse:
+  #   image: yandex/clickhouse-server:21.3.20.1
+  #   restart: always
+  #   container_name: clickhouse
+  #   ports:
+  #     - "8123:8123"
+  #     - "9000:9000"
+  #   healthcheck:
+  #     test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
+  #     interval: 5s
+  #     timeout: 30s
+  #     retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    restart: unless-stopped
+    container_name: app
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - rabbitmq
+      - mariadb

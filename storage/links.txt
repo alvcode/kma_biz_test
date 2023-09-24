@@ -1,0 +1,10 @@
+https://www.postgresql.org
+https://www.mysql.com
+https://www.yiiframework.com
+https://laravel.com
+https://www.php.net
+https://ya.ru
+https://www.rabbitmq.com
+https://timeweb.com
+https://selectel.ru
+https://dashamail.ru

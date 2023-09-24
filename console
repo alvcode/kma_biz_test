@@ -1,0 +1,13 @@
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use core\ApplicationConsole;
+use routes\Console;
+
+$app = new ApplicationConsole();
+
+$consoleRoutes = new Console($app);
+$consoleRoutes();
+
+$app->run();
