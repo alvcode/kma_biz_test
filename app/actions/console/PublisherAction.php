@@ -24,7 +24,7 @@ class PublisherAction
             ['x-delayed-type' => ['S', 'direct']]
         );
 
-        $file = fopen(__DIR__ . '/../../storage/links.txt', 'r');
+        $file = fopen(__DIR__ . '/../../../storage/links.txt', 'r');
         
         while (!feof($file)) {
             $line = fgets($file);

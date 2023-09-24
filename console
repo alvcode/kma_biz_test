@@ -3,7 +3,11 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use core\ApplicationConsole;
+use Dotenv\Dotenv;
 use routes\Console;
+
+$dotenv = Dotenv::createImmutable('.');
+$dotenv->load();
 
 $app = new ApplicationConsole();
 
