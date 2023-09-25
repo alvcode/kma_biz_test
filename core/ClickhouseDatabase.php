@@ -4,7 +4,7 @@ namespace core;
 
 use PDO;
 
-class MysqlDatabase extends Database{
+class ClickhouseDatabase extends Database{
 
     public function __construct() {
         parent::__construct();
@@ -12,6 +12,6 @@ class MysqlDatabase extends Database{
 
     protected function getConnection(): PDO
     {
-        return MysqlDatabaseConfig::getConnection();
+        return ClickhouseDatabaseConfig::getConnection();
     }
 }

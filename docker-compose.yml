@@ -17,7 +17,7 @@ services:
     restart: always
     container_name: mariadb
     environment:
-      MARIADB_ROOT_PASSWORD: DFGHJKVCBNfghjCVBNPLK
+      MARIADB_ROOT_PASSWORD: DFGHJKVCBNfghjCVBNPLK # потому что тестовый проект
       MARIADB_DATABASE: 'main'
     ports:
       - "3306:3306"

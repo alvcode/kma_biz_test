@@ -5,16 +5,16 @@ namespace core;
 use PDO;
 use PDOException;
 
-class MysqlDatabaseConfig implements DatabaseConfigInterface{
+class ClickhouseDatabaseConfig implements DatabaseConfigInterface{
 
     private static $connection;
 
     public static function getConnection(): PDO {
         if(!self::$connection){
-            $host = $_ENV['DB_HOST'];
-            $username = $_ENV['DB_USERNAME'];
-            $password = $_ENV['DB_PASSWORD'];
-            $dbname = $_ENV['DB_NAME'];
+            $host = $_ENV['CLICKHOUSE_HOST'];
+            $username = $_ENV['CLICKHOUSE_USERNAME'];
+            $password = $_ENV['CLICKHOUSE_PASSWORD'];
+            $dbname = $_ENV['CLICKHOUSE_NAME'];
 
             $dsn = "mysql:host={$host};dbname={$dbname}";
             $options = array(
